@@ -1,0 +1,38 @@
+# --- Credenciales y secretos (NUNCA subir a GitHub) ---
+.env
+**/profiles.yml
+*.pem
+*.key
+credentials.csv
+
+# --- dbt ---
+**/target/
+**/dbt_packages/
+**/logs/
+.user.yml
+
+# --- Airflow ---
+logs/
+plugins/__pycache__/
+airflow.db
+airflow-webserver.pid
+standalone_admin_password.txt
+
+# --- Python ---
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.egg-info/
+
+# --- Docker ---
+*.pid
+
+# --- Datasets grandes ---
+*.csv
+
+# --- Sistema ---
+.DS_Store
+Thumbs.db
+.vscode/
