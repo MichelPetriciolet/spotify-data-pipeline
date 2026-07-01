@@ -10,7 +10,7 @@ from airflow.utils.trigger_rule import TriggerRule
 default_args ={
     'owner': 'data-team',
     'retries': 1,
-    'retry_delay': timedelta(munites=5),
+    'retry_delay': timedelta(minutes=5),
 }
 
 with DAG(
@@ -29,7 +29,7 @@ with DAG(
         bucket_key='spotify/*.csv',
         wildcard_match=True,
         aws_conn_id='aws_default',
-        poke_internal=60,
+        poke_interval=60,
         timeout=300,
     )
     
@@ -76,8 +76,8 @@ with DAG(
     
     #4. Email si no hay datos
     email_no_data = EmailOperator(
-        task_id='email_no data',
-        to=[josuemichelpetricioletcortes@gmail.com],
+        task_id='email_no_data',
+        to=['josuemichelpetricioletcortes@gmail.com'],
         subject='⚠️ Spotify Pipeline — Sin datos cargados {{ ds }}',
         html_content="""
             <h2>Pipeline de Spotify — Advertencia</h2>
@@ -89,7 +89,7 @@ with DAG(
             </ul>
             <p>El pipeline se detuvo sin modificar los marts existentes.</p>
         """,
-        trigger_rule=TriggerRule.ONE_FAILD,
+        trigger_rule=TriggerRule.ONE_FAILED,
     )
     
     
