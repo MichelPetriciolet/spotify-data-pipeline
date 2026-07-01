@@ -16,8 +16,8 @@ default_args ={
 with DAG(
     dag_id='spotify_etl_dag',
     default_args=default_args,
-    schedule_interval='@daily'
-    start_date=datetime(2024,1,1),
+    schedule_interval='@daily',
+    start_date=datetime(2024, 1, 1),
     catchup=False,
     tags=['spotify', 'snowflake', 'dbt'],
 ) as dag:
