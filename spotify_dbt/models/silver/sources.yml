@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: spotify_db
+    schema: bronze
+    tables:
+      - name: spotify_tracks
+        description: "Datos crudos del dataset de Spotify desde S3 con partición year/month/day"
