@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: fact_track_history
+    description: "Un registro por track_id + metric_date. Base para análisis de tendencias."
+    columns:
+      - name: track_id
+        tests: [not_null]
+      - name: metric_date
+        tests: [not_null]
+      - name: popularity_tier
+        tests:
+          - accepted_values:
+              values: ['high', 'medium', 'low']
+
+  - name: track_popularity_trend
+    description: "Variación mensual de popularidad por track con LAG()"
+    columns:
+      - name: track_id
+        tests: [not_null]
+
+  - name: genre_audio_profile
+    description: "Perfil de audio promedio por género y mes"
+
+  - name: top_tracks_by_genre
+    description: "Top 10 tracks por género y mes"
+
+  - name: artist_popularity
+    description: "Popularidad mensual por artista con variación mes a mes"
