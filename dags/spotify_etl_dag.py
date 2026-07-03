@@ -134,8 +134,27 @@ with DAG(
     )
     
     
+    #4. Email si corrio correcto el pipeline
+    email_success_data = EmailOperator(
+        task_id='email_success_data',
+        to=['josuemichelpetricioletcortes@gmail.com'],
+        subject=' Spotify Pipeline — Terminado excitosamente',
+        html_content="""
+            <h2>Pipeline de Spotify — Terminado</h2>
+            <p>El pipeline del <b>{{ ds }}</b> termino sin errores.</p>
+            <ul>
+                <li><b>DAG:</b> spotify_etl_dag</li>
+                <li><b>Fecha:</b> {{ ds }}</li>
+                <li><b>Tabla:</b> spotify_db.gold.spotify_tracks</li>
+            </ul>
+            <p>El pipeline ejecuto las cargas a las tablas correspondientes.</p>
+        """,
+        trigger_rule='all_success',
+    )
+    
+    
     #DEPENDENCIAS
     check_s3_file >> load_raw >> validate_load
     validate_load >> email_no_data
-    validate_load >> register_load >> run_dbt_models >> run_dbt_tests
+    validate_load >> register_load >> run_dbt_models >> run_dbt_tests >> email_success_data
     
