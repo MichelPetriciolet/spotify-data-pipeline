@@ -17,5 +17,8 @@ models:
       - name: genre
         tests: [not_null]
     tests:
-      - unique:
-          column_name: "track_id || '|' || metric_date::VARCHAR"
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - track_id
+            - metric_date
+  
