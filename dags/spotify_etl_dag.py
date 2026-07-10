@@ -10,7 +10,7 @@ from airflow.utils.trigger_rule import TriggerRule
 default_args ={
     'owner': 'data-team',
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=2),
 }
 
 with DAG(
